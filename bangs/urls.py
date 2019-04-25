@@ -5,6 +5,7 @@ from . import views, api_views
 # Register api urls
 router = DefaultRouter()
 router.register(r'twitch_users', api_views.TwitchUserViewSet, basename="twitch_user")
+router.register(r'bangs', api_views.BangViewSet, basename="bangs")
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
@@ -12,4 +13,3 @@ urlpatterns = [
     path('api/', include((router.urls, 'bangs-api'))),
     path('', views.login_view, name='login'),
 ]
-
