@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build bambot/bang_central .
+  - docker build -t bambot/bang_central .
   - docker run bambot/bang_central --name bang_central
   - docker ps -a
   - docker stop bang_central
