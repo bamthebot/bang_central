@@ -8,7 +8,7 @@ before_install:
   - docker run -d --name bang_central bambot/bang_central 
   - docker ps -a
   - docker stop bang_central
-  - docker run bambot/bang_central /bin/sh -c "export environment=test; cd home/bam/bangcentral; . venv/bin/activate"
+  - docker run bambot/bang_central /bin/sh -c "export environment=test; cd /home/bam/bangcentral; . venv/bin/activate"
 
 script:
   - ./manage.py test
