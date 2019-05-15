@@ -1,4 +1,4 @@
-# Bang Central
+# 🔵 Bang Central
 [![Build Status](https://travis-ci.org/bamthebot/bang_central.svg?branch=master)](https://travis-ci.org/bamthebot/bang_central)
 
 > Where all your bangs will be stored.
