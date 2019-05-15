@@ -5,7 +5,7 @@ services:
 
 before_install:
   - docker build -t bambot/bang_central .
-  - docker run bambot/bang_central --name bang_central
+  - docker run --name bang_central bambot/bang_central 
   - docker ps -a
   - docker stop bang_central
   - docker run bang_central /bin/sh -c "export environment=test; cd home/bam/bangcentral; source venv/bin/activate"
