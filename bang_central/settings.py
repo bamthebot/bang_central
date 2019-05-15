@@ -21,23 +21,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '32n8c0c3lji6dntksm^#e3t7h1008&528fsi1uns60ud84$vga'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['host.docker.internal', 'localhost', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
     'bangs',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'rest_framework',
     'django.contrib.staticfiles',
 ]
 
@@ -71,7 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bang_central.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -81,7 +77,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -119,4 +114,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+
+if os.getenv('ENVIRONMENT', 'development') == 'PRODUCTION':
+    # Database
+    # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT')
+        }
+    }
+
+    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+    DEBUG = False
+
+    ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST'), 'host.docker.internal', 'localhost', '127.0.0.1']
