@@ -11,5 +11,5 @@ before_install:
   - docker run bambot/bang_central /bin/sh -c "export environment=test; cd /home/bam/bangcentral; . venv/bin/activate"
 
 script:
-  - ./manage.py test
+  - docker run bambot/bang_central /bin/sh -c "export environment=test; cd /home/bam/bangcentral; . venv/bin/activate &&./manage.py test"
 
