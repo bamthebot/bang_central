@@ -1,10 +1,15 @@
-dist: xenial
 language: python
-env:
-  - ENVIRONMENT=test
-python:
-  - "3.7"
-install:
-  - pip install -r requirements.txt
+
+services:
+  - docker
+
+before_install:
+  - docker build bambot/bang_central .
+  - docker run bambot/bang_central --name bang_central
+  - docker ps -a
+  - docker stop bang_central
+  - docker run bang_central /bin/sh -c "export environment=test; cd home/bam/bangcentral; source venv/bin/activate"
+
 script:
-  - python manage.py test
+  - ./manage.py test
+
