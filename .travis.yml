@@ -1,10 +1,10 @@
+dist: xenial
 language: python
 environement:
   - ENVIRONMENT=test
 
 services:
   - docker
-  - docker-compose
 
 before_install:
   - docker build -t bang_central .
