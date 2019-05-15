@@ -6,6 +6,7 @@
 This is the project that will hold all the information regarding to twitch and how the bots should behave.
 
 ## TODO:
+- [ ] Tests
 - [ ] CSS
 - [ ] CI/CD
 - [ ] JWT
