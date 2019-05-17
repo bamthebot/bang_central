@@ -1,26 +1,24 @@
 dist: xenial
 language: python
 environement:
-  - ENVIRONMENT=test
-  - HOST_HTTP_PORT=8000
-
+- ENVIRONMENT=test
+- HOST_HTTP_PORT=8000
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -t bang_central .
-
+- docker build -t bang_central .
 script:
-  - docker-compose run web python manage.py test
-
+- docker-compose run web python manage.py test
 deploy:
-  # Master
-  - provider: script
-    script: bash scripts/deploy.sh master
-    on:
-      branch: master
-  # Stage
-  - provider: script
-    script: bash scripts/deploy.sh stage
-    on:
-      branch: stage
+- provider: script
+  script: bash scripts/deploy.sh master
+  on:
+    branch: master
+- provider: script
+  script: bash scripts/deploy.sh stage
+  on:
+    branch: stage
+env:
+  global:
+  - secure: Ff4oFz9GaYH3HhzMEK/3rkPMb2jrAEDppDcyt4jtTLwwjEGobpETY+oey19dWoCYpxXIozpkKqgaQQg8MiynPWcf4ncpAzTwGU2GD1L89wyOef1JxxD0vCTksSBc53MesaNEA3O8GbW4fEtz4iNJ8mmQa43TtA5CtOzavHRYBVBBGIBcv1fEh1k5vM9YFj2o7kBQ1ODW6oaVsPbxnz4jLdakFsr7DhCmGSpuET0MTwGt1P5LNwrhW1aOb+uSFqUuHq7symnde4ESzJce+HOvMR7YiOPF2zfS+lFMY7hD7e53SMpowMtMjaasF3NW+1Y0Z0piAsSKMJjfq9N17tZaywbfjIU1xhrmjGF3YhOf2Is+B4fm/RzTMuLQYCLXkEZ4o7d5h8/OvP3dFptPVJo9e7l8x4VgLE7yvukEOF/si0pNp24pTNcrrr8wRanLGX6Q3ecdiFcF2f6vdJHQWKo7caRkoRKTPgsloKM6r1iSqD7bsMxql+VRH/b6t41NOrJ/H18Nm5OWqhc64enLRWCgzGo1j6GfAXcydqxs6jIz9fjrTPwqETIGl0v7jdpJUEsVBOxcHpNVeaYrmwtJi/806+69FbWuhfUIuiRHjR2YMbkRCaNloWu56dDcNHBZv8p11yyA0P9EPj3QQFiaJ6VRVxVdFHfAM0wAWgVt2EeMo5w=
+  - secure: Ny3TdRlww5PIDb5bWBgPu2qwi8KbEXt+lTBTLC3yp7Bu90ENyRvzm7/085iac/T04Sd7uRHQS1eRCY+GCDCUgBkltVcVm8XdgUTgPZfDsEpqsyrrzAoTyF8fygHvAY+aghw4RVOunuqZo0hHw7ggrq9Oiyab40/BuNNYvAAfWf+AjQGF0gx/+jktmkBYtPckZiNO5XUJeJKwQHRFC91jYw65zIoTcAAFNbss2/s/Tuhn8LecBPVrANzJqd6WNAOKC3yK1nmgKPZumZj1meGF852YZcOwMtyrc3FUkTZb4g1YoHr5oEOHxWfyr3+FfmFd4GGBgnIqi0dBcCqCRN/yf5wM/lxHO8XJIV1XkXiuCvYLlbeqNV9QGEcb2H7nUtuFU1zd8TFVaeYsaIYeaDsC+e8DO6b/ky1hLuiQ16tuDa8VPFwG3RxtM12YTdfyfQ+IOeGLENnwxsaIf9ARx9/WEeaQju85/PkVJK8Gd5CA9/lQmEeTVUNhreQj+qEUYd4xpFjpVQaiQABEeFlsF4UxCWcRdm800vuyf5OAhgZlDt+xo7CIBKNpsWjSvPrAvhwD904GN/teCnGG9YyhxX21zfXNYA2fLaXvW/NJahNHwp4ipf9yNuGtY8aOv1RnvtzLqtzVO+qhOEez8LcIgH5rMt8aAxgLitNvNLFRuxlQGSk=
