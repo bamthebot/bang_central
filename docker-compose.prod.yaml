@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   web:
-    image: bang_central
+    image: twitchbambot/bang_central:master
     volumes:
      - .:/home/bam/bangcentral
     environment:
