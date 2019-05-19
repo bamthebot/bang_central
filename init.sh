@@ -1,3 +1,3 @@
 #!/bin/bash
 source .env
-docker-compose -d -f docker-compose.prod.yaml up
+docker-compose -f docker-compose.prod.yaml up -d
