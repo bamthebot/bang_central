@@ -3,8 +3,6 @@ services:
   web:
     restart: always
     image: twitchbambot/bang_central:master
-    volumes:
-     - .:/home/bam/bangcentral
     environment:
      - CLIENT_ID
      - CLIENT_SECRET
@@ -17,6 +15,7 @@ services:
      - DB_PORT
     networks:  # <-- here
       - nginx_network
+    command: gunicorn --bind 0.0.0.0:80 bang_central.wsgi 
   nginx:
     restart: always
     image: nginx:1.13
