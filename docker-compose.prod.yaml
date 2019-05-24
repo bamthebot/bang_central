@@ -25,6 +25,8 @@ services:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
     depends_on: 
       - web
+    environment:
+     - SERVER_NAME
     networks:  # <-- here
       - nginx_network
   watchtower:
