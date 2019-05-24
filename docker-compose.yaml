@@ -1,6 +1,7 @@
 version: '3.3'
 services:
   web:
+    restart: always
     image: bang_central
     volumes:
      - .:/home/bam/bangcentral
@@ -17,6 +18,7 @@ services:
     networks:  # <-- here
       - nginx_network
   nginx:
+    restart: always
     image: nginx:1.13
     ports:
       - $HOST_HTTP_PORT:80
