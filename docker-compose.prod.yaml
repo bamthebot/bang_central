@@ -3,6 +3,9 @@ services:
   web:
     restart: always
     image: twitchbambot/bang_central:master
+    volumes: 
+     - ./config/nginx:/etc/nginx/conf.d
+     - /static:/static
     environment:
      - CLIENT_ID
      - CLIENT_SECRET
@@ -13,7 +16,7 @@ services:
      - DB_PASSWORD
      - DB_HOST
      - DB_PORT
-    networks:  # <-- here
+    networks:
       - nginx_network
     command: gunicorn --bind 0.0.0.0:80 bang_central.wsgi 
   nginx:
@@ -27,7 +30,7 @@ services:
       - web
     environment:
      - SERVER_NAME
-    networks:  # <-- here
+    networks:
       - nginx_network
   watchtower:
     restart: always
@@ -36,6 +39,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /root/.docker/config.json:/config.json
     command: --schedule "0 4 1 * *" --cleanup
-networks:  # <-- and here
+networks:
   nginx_network:
     driver: bridge
