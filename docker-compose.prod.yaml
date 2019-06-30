@@ -5,7 +5,7 @@ services:
     image: twitchbambot/bang_central:master
     volumes: 
      - ./config/nginx:/etc/nginx/conf.d
-     - /static:/home/bam/bang_central/static/
+     - /static:/home/bam/bangcentral/static/
     environment:
      - CLIENT_ID
      - CLIENT_SECRET
