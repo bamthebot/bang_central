@@ -8,6 +8,7 @@ services:
      - /static:/home/bam/bangcentral/static/
     environment:
      - CLIENT_ID
+     - REDIRECT_URI
      - CLIENT_SECRET
      - ENVIRONMENT
      - DJANGO_SECRET_KEY

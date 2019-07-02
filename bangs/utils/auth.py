@@ -4,7 +4,7 @@ import json
 
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET_ID = os.getenv('CLIENT_SECRET')
-REDIRECT_URI = os.getenv('REDIRECT_URI', 'http://localhost:8000/bot/login')
+REDIRECT_URI = os.getenv('REDIRECT_URI')
 
 
 def authorize_request(scope):
