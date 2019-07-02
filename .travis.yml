@@ -10,7 +10,7 @@ before_install:
   -in .env.enc -out .env -d
 - docker build -t bang_central .
 script:
-- docker-compose run web python manage.py test
+- docker-compose -f docker-compose.prod.yaml run web python manage.py test
 deploy:
 - provider: script
   script: bash scripts/deploy.sh master
