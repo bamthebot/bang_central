@@ -6,6 +6,8 @@ environement:
 services:
 - docker
 before_install:
+- openssl aes-256-cbc -K $encrypted_972af26ff6ea_key -iv $encrypted_972af26ff6ea_iv
+  -in .env.enc -out .env -d
 - docker build -t bang_central .
 script:
 - docker-compose run web python manage.py test
