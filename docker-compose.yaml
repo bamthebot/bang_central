@@ -2,32 +2,16 @@ version: '3.3'
 services:
   web:
     restart: always
-    image: bang_central
+    build: .
     volumes:
      - .:/home/bam/bangcentral
+     - /static:/home/bam/bangcentral/static/
+     - ./config/nginx:/etc/nginx/conf.d
     environment:
      - CLIENT_ID
      - CLIENT_SECRET
-     - ENVIRONMENT
-     - DJANGO_SECRET_KEY
-     - ALLOWED_HOST
-     - DB_USER
-     - DB_PASSWORD
-     - DB_HOST
-     - DB_PORT
-    networks:  # <-- here
-      - nginx_network
-  nginx:
-    restart: always
-    image: nginx:1.13
+     - ALLOWED_HOST='*'
+     - REDIRECT_URI='http://127.0.0.1:8000/bot/login'
     ports:
-      - $HOST_HTTP_PORT:80
-    volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
-    depends_on: 
-      - web
-    networks:  # <-- here
-      - nginx_network
-networks:  # <-- and here
-  nginx_network:
-    driver: bridge
+      - "8000"
+    command: './manage.py runserver 0.0.0.0:8000'

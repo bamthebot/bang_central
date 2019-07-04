@@ -27,6 +27,7 @@ services:
       - "80:80"
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - /static:/static/
     depends_on: 
       - web
     environment:

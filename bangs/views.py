@@ -38,13 +38,12 @@ def login_view(request):
             user = authenticate(username=twitch_user.twitch_id, password=twitch_user.access_token)
             print('User {} UPDATED! New token: {}'.format(twitch_user.twitch_name, twitch_user.access_token))
         except TwitchUser.DoesNotExist:
-
+            breakpoint()
             # If user doesn't exist, create new one with parameters given by auth and user info.
             user = User.objects.create_user(username=user_dict['id'], email=user_dict['email'], password=auth_dict['access_token'])
             twitch_user = TwitchUser(twitch_id=int(user_dict['id']), twitch_name=user_dict['display_name'], email=user_dict['email'], access_token=auth_dict['access_token'], refresh_token=auth_dict['refresh_token'], expiration_date=expiration_date, scope=scope, user=user)
             twitch_user.save()
-            user = authenticate(username=user_dict['display_name'], password=None)
-            user.save()
+            user = authenticate(username=user_dict['id'], password=auth_dict['access_token'])
             print('User {} CREATED'.format(twitch_user.twitch_name))
             login(request, user)
             return bangs(request)
