@@ -8,12 +8,13 @@ services:
 script:
 - docker-compose run web ./manage.py test
 deploy:
-  skip_cleanup: true
 - provider: script
+  skip_cleanup: true
   script: bash scripts/deploy.sh master
   on:
     branch: master
 - provider: script
+  skip_cleanup: true
   script: bash scripts/deploy.sh stage
   on:
     branch: stage
