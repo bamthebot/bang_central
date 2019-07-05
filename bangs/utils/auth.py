@@ -32,7 +32,7 @@ def get_user_dict(token):
     headers = {"Client-ID": CLIENT_ID, "Authorization": "Bearer {}".format(token)}
     response = requests.get(url, headers=headers).json()["data"][0]
     print('User request:', url)
-    print('Response:', response.text)
+    print('Response:', response)
     return response
 
 
