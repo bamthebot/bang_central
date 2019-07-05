@@ -12,6 +12,7 @@ def authorize_request(scope):
     request = "https://id.twitch.tv/oauth2/authorize?response_type=code&client_id={}&redirect_uri={}&scope={}".format(
         CLIENT_ID, REDIRECT_URI, scope
     )
+    print('Authorization request', request)
     return request
 
 
@@ -21,7 +22,8 @@ def token_request(code):
     )
     request = requests.post(url)
     response_dict = json.loads(request.text)
-    print(response_dict)
+    print('Token request:', url)
+    print('Response:', response_dict)
     return response_dict
 
 
@@ -29,6 +31,8 @@ def get_user_dict(token):
     url = "https://api.twitch.tv/helix/users?scope=user:read:email"
     headers = {"Client-ID": CLIENT_ID, "Authorization": "Bearer {}".format(token)}
     response = requests.get(url, headers=headers).json()["data"][0]
+    print('User request:', url)
+    print('Response:', response.text)
     return response
 
 
@@ -37,5 +41,7 @@ def refresh_token(token):
         CLIENT_ID, CLIENT_SECRET_ID, token
     )
     response = requests.post(url)
+    print('Refresh token request:', url)
+    print('Response', response.text)
     if response.status_code == requests.codes.ok:
         return response.json()
