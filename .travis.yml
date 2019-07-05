@@ -10,11 +10,11 @@ script:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: bash scripts/deploy.sh master
+  script: cd scripts && bash deploy.sh master
   on:
     branch: master
 - provider: script
   skip_cleanup: true
-  script: bash scripts/deploy.sh stage
+  script: cd scripts 6& bash deploy.sh stage
   on:
     branch: stage
