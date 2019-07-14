@@ -1,3 +1,5 @@
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework import serializers
 
@@ -11,6 +13,8 @@ class TwitchUserSerializer(serializers.ModelSerializer):
 
 
 class TwitchUserViewSet(viewsets.ReadOnlyModelViewSet):
+    authentication_classes = (SessionAuthentication, TokenAuthentication)
+    permission_classes = (IsAuthenticated,)
     serializer_class = TwitchUserSerializer
     queryset = TwitchUser.objects.all()
 
@@ -22,5 +26,7 @@ class BangSerializer(serializers.ModelSerializer):
 
 
 class BangViewSet(viewsets.ReadOnlyModelViewSet):
+    authentication_classes = (SessionAuthentication, TokenAuthentication)
+    permission_classes = (IsAuthenticated,)
     serializer_class = BangSerializer
     queryset = Bang.objects.all()
