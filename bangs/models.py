@@ -20,7 +20,6 @@ class TwitchUser(models.Model):
 class Bang(models.Model):
     command = models.CharField(max_length=500)
     response = models.CharField(max_length=500)
-    twitch_user = models.ForeignKey(TwitchUser, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

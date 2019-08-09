@@ -1,26 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bangs - BamBot</title>
-</head>
-<body>
-<div id="Bangs">
-    <form method="post" id="bang_formset" action="{% url 'bangs' %}">
-        <div id="existing-bangs">
-          <h1 id="saved_bangs">Bangs:</h1>
-          {% if bang_formset.forms %}
-                  {% csrf_token %}
-                  {{ bang_formset.management_form }}
-                  {% for form in bang_formset %}
-                      {{ form }}
-                  {% empty %}
-                  <p class="no_bangs">There are no bangs saved... yet.</p>
-                  {% endfor %}
-          {% endif %}
-          <input type="submit" value="Submit"/>
-        </div>
-    </form>
+{% extends 'bangs/base.html' %}
+
+{% block content %}
+<form method="post" id="bang_formset" action="{% url 'bangs' %}">
+    <div id="existing-bangs" class="row-md-8 form-group">
+      <h1 id="saved-bangs">Your Bangs</h1>
+      {% if bang_formset.forms %}
+              {% csrf_token %}
+              {{ bang_formset.management_form }}
+              {% for form in bang_formset %}
+              <div class="row-md graphics-container">
+                  {{ form }}
+              </div>
+              {% empty %}
+              <p class="no_bangs">There are no bangs saved... yet.</p>
+              {% endfor %}
+      {% endif %}
+  <input type="submit" value="Submit" class="btn btn-info"/>
+    </div>
+</form>
 </div>
-</body>
-</html>
+{% endblock %}

@@ -2,4 +2,4 @@ requests
 django
 django-rest-framework
 gunicorn
-psycopg2
+psycopg2-binary

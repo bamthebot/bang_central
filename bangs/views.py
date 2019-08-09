@@ -91,7 +91,7 @@ def login_view(request):
     return render(request, "bangs/login.html", context)
 
 
-@login_required(login_url="/bangs/login/")
+@login_required(login_url="/bot/login/")
 def bangs(request):
     user = request.user
     BangInlineFormset = inlineformset_factory(
@@ -102,4 +102,7 @@ def bangs(request):
         if bang_formset.is_valid():
             bang_formset.save()
     bang_formset = BangInlineFormset(instance=user)
+    for form in bang_formset:
+        for field in form:
+            field.field.widget.attrs.update({'class': 'form-control'})
     return render(request, "bangs/bangs.html", {"bang_formset": bang_formset})

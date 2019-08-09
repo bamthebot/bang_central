@@ -1,0 +1,86 @@
+/* Palette:
+ *  Highlight #2A90F7
+ *  Background #000000
+ *  Background2 #303036
+ *  Foreground #fbfef9
+ *  Foreground2 #FFB400
+ *  
+ *
+ */
+
+body {
+    background-color: #000000;
+    color: #fbfef9;
+    font-family: 'Blinker', sans-serif;
+}
+
+.card {
+    border-radius: 0;
+}
+.login-card {
+    border-color: #ed1f00;
+    background-color: #000000;
+    color: #ed1f00;
+}
+
+a {
+    color: inherit; 
+    text-decoration: inherit;
+}
+
+a:hover {
+    color: inherit; 
+    text-decoration: inherit;
+}
+
+.menu-container {
+    text-align: right;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00a9ff;
+    color: #00a9ff;
+    margin: 2em;
+}
+
+.graphics-container {
+    margin: 10px;
+    padding: 4em;
+    border-style: solid;
+    border-width: 1px;
+    color: #fbfef9;
+    border-color: #ed1f00;
+}
+
+.btn-info {
+    background-color: #00ff9f;
+    border-color: #00ff9f;
+}
+
+.link {
+  position: relative;
+  z-index: 1;
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: -0.25em;
+  right: -0.25em;
+  background-color: #ed1f00;
+  transform-origin: bottom center;
+  transform: scaleY(0.1);
+  transition: all 0.1s ease-in-out;
+}
+
+.link:hover::before {
+  transform: scaleY(1);
+  background-color: hsla(8, 100%, 46%, 0.75);
+}
+
+.link:hover {
+    color: #fbfef9;
+}

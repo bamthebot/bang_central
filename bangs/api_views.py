@@ -9,7 +9,7 @@ from .models import TwitchUser, Bang
 class TwitchUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = TwitchUser
-        fields = ('id', 'twitch_id', 'twitch_name', 'email', 'access_token')
+        fields = ('twitch_id', 'twitch_name', 'email', 'access_token', 'user')
 
 
 class TwitchUserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -22,7 +22,7 @@ class TwitchUserViewSet(viewsets.ReadOnlyModelViewSet):
 class BangSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bang
-        fields = ('command', 'response', 'twitch_user')
+        fields = ('command', 'response', 'user')
 
 
 class BangViewSet(viewsets.ReadOnlyModelViewSet):

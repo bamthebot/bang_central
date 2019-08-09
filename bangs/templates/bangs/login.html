@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login - BamBot</title>
-</head>
-<body>
-<h1>Log in with your twitch account at BamBot</h1>
-<a href="{{ get_request }}">Log in Here</a>
-</body>
-</html>
+{% extends 'bangs/blank-base.html' %}
+
+{% block content %}
+<div class="col-sm">
+    
+<div class="card mx-auto login-card w-50 p-3 text-center">
+    <div class="card-header">Login</div>
+        <div class="card-body">
+            <h3 class="card-title">Use your twitch account at BamBot</h1>
+            <a class="card-text link" href="{{ get_request }}">Click Here!</a>
+        </div>
+</div>
+</div>
+{% endblock %}
