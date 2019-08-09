@@ -22,7 +22,7 @@ class TwitchUserViewSet(viewsets.ReadOnlyModelViewSet):
 class BangSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bang
-        fields = ('command', 'response', 'user')
+        fields = ('command', 'response', 'twitch_user')
 
 
 class BangViewSet(viewsets.ReadOnlyModelViewSet):
