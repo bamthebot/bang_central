@@ -19,7 +19,7 @@ services:
      - DB_PORT
     networks:
       - nginx_network
-    command: gunicorn --bind 0.0.0.0:80 bang_central.wsgi 
+    command: gunicorn --bind 0.0.0.0:80 bang_central.wsgi --log-level=critical 
   nginx:
     restart: always
     image: nginx:1.13
