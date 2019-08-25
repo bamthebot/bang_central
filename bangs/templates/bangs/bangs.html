@@ -2,20 +2,47 @@
 
 {% block content %}
 <form method="post" id="bang_formset" action="{% url 'bangs' %}">
-    <div id="existing-bangs" class="row-md-8 form-group">
-      <h1 id="saved-bangs">Your Bangs</h1>
-      {% if bang_formset.forms %}
-              {% csrf_token %}
-              {{ bang_formset.management_form }}
-              {% for form in bang_formset %}
-              <div class="row-md graphics-container">
-                  {{ form }}
-              </div>
-              {% empty %}
-              <p class="no_bangs">There are no bangs saved... yet.</p>
-              {% endfor %}
-      {% endif %}
-  <input type="submit" value="Submit" class="btn btn-info"/>
+    <div class="row">
+        <div id="existing-bangs" class="col-md-6 form-group-sm graphics-container">
+            <h1 id="saved-bangs">Your Bangs</h1>
+            {% if bang_formset.forms %}
+            {% csrf_token %}
+            {{ bang_formset.management_form }}
+            {% for form in bang_formset %}
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+                {% if field.name == 'DELETE' %}
+                <div class="form-check">
+                    {{ field }}
+                    <label class="form-check-label" for="{{ field.id_for_label}}">Delete</label>
+                </div>
+                {% else %}
+                {{ field }}
+                {% endif %}
+                {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% empty %}
+            <p class="no_bangs">There are no bangs saved... yet.</p>
+            {% endfor %}
+            {% endif %}
+            <input type="submit" value="Submit" class="btn btn-info"/>
+        </div>
+        <div class="col-md-4 filled-container">
+            <h3>What is a Bang?</h3> 
+            <p>A bang is a command/response pair that can be either defined by the user, or be a special-bang.</p>
+            <p>You can define, edit and delete your bangs here on the left. </p>
+            <h3>What are Special Bangs?</h3> 
+            <p>Those are bangs that do very special things! Some control the bot, others can get you useful information. There's even a bang to help you with bangs ("!help").</p>
+            <p>Some special bangs belong to tiers. Tier 1 is the free tier and all bangs will belong to this tier for a while. You can check what bangs belong to tier 1 by using "!tierone"</p>
+            <p>Other special bangs belong to no tier, and that's because their only purpose is to control the bot. Currently, these are "!help" and "!mute" and they will be free forever!</p>
+        </div>
     </div>
 </form>
 </div>

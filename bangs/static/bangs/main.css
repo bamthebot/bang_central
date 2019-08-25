@@ -1,26 +1,38 @@
 /* Palette:
- *  Highlight #2A90F7
- *  Background #000000
+ *  Highlight #FBFF12
+ *  Highlight2 #FF206E
+ *  Background #0C0F0A
  *  Background2 #303036
- *  Foreground #fbfef9
- *  Foreground2 #FFB400
+ *  Foreground #41EAD4
+ *  Foreground2 #FFFFFF
  *  
  *
  */
 
 body {
-    background-color: #000000;
-    color: #fbfef9;
+    background-color: #0C0F0A;
+    color: #FFFFFF;
     font-family: 'Blinker', sans-serif;
+}
+
+.btn-info {
+    background-color: #0C0F0A;
+    border-color: #41EAD4;
+}
+
+.btn-info:hover {
+    background-color: #41EAD4;
+    border-color: #41EAD4;
 }
 
 .card {
     border-radius: 0;
 }
 .login-card {
-    border-color: #ed1f00;
-    background-color: #000000;
-    color: #ed1f00;
+    border-color: #FF206E;
+    background-color: #0C0F0A;
+    color: #FF206E;
+    margin: 2em;
 }
 
 a {
@@ -34,29 +46,55 @@ a:hover {
 }
 
 .menu-container {
-    text-align: right;
-    padding: 10px;
+    text-align: center;
+    padding: 30px;
     border-style: solid;
     border-width: 1px;
-    border-color: #00a9ff;
-    color: #00a9ff;
-    margin: 2em;
+    color: #0C0F0A;
+    margin: 2px;
+    overflow: hidden;
 }
 
+.menu-container a {
+    background-color: #FF206E;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.menu-container a:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
 .graphics-container {
     margin: 10px;
-    padding: 4em;
+    padding: 1em;
     border-style: solid;
     border-width: 1px;
-    color: #fbfef9;
-    border-color: #ed1f00;
+    background-color: #0C0F0A;
+    color: #FFFFFF;
+    border-color: #41EAD4;
 }
 
-.btn-info {
-    background-color: #00ff9f;
-    border-color: #00ff9f;
+.graphics-container h1 {
+    color: #41EAD4;
 }
 
+.graphics-container h2 {
+    color: #41EAD4;
+}
+
+.filled-container {
+    margin: 10px;
+    padding: 1em;
+    border-style: solid;
+    border-width: 1px;
+    color: #0C0F0A;
+    background-color: #FBFF12;
+    border-color: #FBFF12;
+}
 .link {
   position: relative;
   z-index: 1;
@@ -70,7 +108,7 @@ a:hover {
   bottom: 0;
   left: -0.25em;
   right: -0.25em;
-  background-color: #ed1f00;
+  background-color: #FF206E;
   transform-origin: bottom center;
   transform: scaleY(0.1);
   transition: all 0.1s ease-in-out;
@@ -78,9 +116,9 @@ a:hover {
 
 .link:hover::before {
   transform: scaleY(1);
-  background-color: hsla(8, 100%, 46%, 0.75);
+  background-color: hsla(339, 100%, 56%, 1);
 }
 
 .link:hover {
-    color: #fbfef9;
+    color: #FFFFFF;
 }

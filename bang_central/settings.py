@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "32n8c0c3lji6dntksm^#e3t7h1008&528fsi1uns60ud84$vga"
 DEBUG = True
 
-ALLOWED_HOSTS = ["host.docker.internal", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["0.0.0.0", "host.docker.internal", "localhost", "127.0.0.1"]
 
 # Application definition
 

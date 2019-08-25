@@ -95,7 +95,7 @@ def login_view(request):
 def bangs(request):
     user = request.user
     BangInlineFormset = inlineformset_factory(
-        User, Bang, fields=("command", "response")
+        User, Bang, fields=("command", "response"), extra=1
     )
     if request.method == "POST":
         bang_formset = BangInlineFormset(request.POST, request.FILES, instance=user)
@@ -104,5 +104,16 @@ def bangs(request):
     bang_formset = BangInlineFormset(instance=user)
     for form in bang_formset:
         for field in form:
+            if field.name == "DELETE":
+                field.field.widget.attrs.update({'class': 'form-check-input'})
+                continue
             field.field.widget.attrs.update({'class': 'form-control'})
     return render(request, "bangs/bangs.html", {"bang_formset": bang_formset})
+
+
+def home(request):
+    get_request = auth.authorize_request(
+        "chat:read+chat:edit+openid+user:read:email"
+    )
+    context = {"get_request": get_request}
+    return render(request, "bangs/index.html", context)

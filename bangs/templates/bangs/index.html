@@ -1,0 +1,74 @@
+{% extends 'bangs/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="card mx-auto w-100 p-30 text-center graphics-container">
+        <h1 class="cart-title">Welcome to bambot!</h1>
+        <p class="card-text">The twitch bot with speedrunners in mind.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md filled-container">
+        <blockquote class="blockquote mx-auto w-50 p-3 text-center">
+            <h3>WTF is bambot?</h3> 
+            <footer class="blockquote-footer">Probably you right now.</footer>
+        </blockquote>
+    </div>
+    <div class="col-md-8 graphics-container">
+        <h2>Bambot is...</h2>  
+        <p>A chatbot created by some dude that after watching his speedrunner friend changing his PB and WR commands manually as if we still were in the 90s, said "hey! this could be easily automated."</p>
+        <h2>And I did automate it.</h2>  
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md graphics-container">
+        <h1>Bambot is also...</h1>  
+        <h1>Bambot is also...</h1>  
+        <h1>Bambot is also...</h1>  
+    </div>
+    <div class="col-md-8 graphics-container">
+        <ul class="list-unstyled">
+            <li>A work in progress.</li>
+            <li>Free until theres so much people it can't continue being free.</li>
+            <li>Made for speedrunners.</li>
+            <li>Opensource.</li>
+            <li>Open for suggestions.</li>
+            <li>Open for your love <3</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-3 mx-auto text-center">
+        <div class="row">
+            <figure class="figure text-center">
+                <img src="{% static "bangs/bot-mascot.jpeg" %}" class="figure-img img-fluid rounded" alt="And here is where I'd put my bot mascot...">
+                <figcaption class="figure-caption">I need a mascot...</figcaption>
+            </figure>
+        </div>
+        <div class="row filled-container text-center">
+            <a class="card-text link" href="{{ get_request }}"><h1>Start Here</h1></a>
+        </div>
+    </div>
+    <div class="col-md-7 graphics-container">
+        <h2>A quick glance over bambot:</h2>  
+        <p>
+            Pairs of command-response are called <i>bangs</i>. They are the base of bambot's functionality.</p>
+        <p>First we have <i>normal bangs</i>, which are you typical user-defined command-response pairs.</p>
+        <figure class="figure text-center">
+            <img src="{% static "bangs/bbot.png" %}" class="figure-img img-fluid rounded" alt="And here is where I'd put my bot mascot...">
+        </figure>
+        <p>We also have <i>special bangs</i>, which do stuff that's a bit more complicated, and come with the bot.</p>
+        <figure class="figure text-center">
+            <img src="{% static "bangs/bbot2.png" %}" class="figure-img img-fluid rounded" alt="And here is where I'd put my bot mascot...">
+        </figure>
+        <p>It'd be pretty tedious to write a whole <i>special bang</i>, so you can <i>chain</i> it with a regular <i>bang</i> to make it easily reusable for your chat</p>
+        <figure class="figure text-center">
+            <img src="{% static "bangs/bbot3.png" %}" class="figure-img img-fluid rounded" alt="And here is where I'd put my bot mascot...">
+        </figure>
+    </div>
+</div>
+{% endblock %}

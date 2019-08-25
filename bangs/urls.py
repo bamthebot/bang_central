@@ -8,8 +8,9 @@ router.register(r'twitch_users', api_views.TwitchUserViewSet, basename="twitch_u
 router.register(r'bangs', api_views.BangViewSet, basename="bangs")
 
 urlpatterns = [
-    path('login/', views.login_view, name='login'),
-    path('bangs/', views.bangs, name='bangs'),
-    path('api/', include((router.urls, 'bangs-api'))),
-    path('', views.login_view, name='login'),
+    path('bot/login/', views.login_view, name='login'),
+    path('bot/bangs/', views.bangs, name='bangs'),
+    path('bot/api/', include((router.urls, 'bangs-api'))),
+    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
 ]
