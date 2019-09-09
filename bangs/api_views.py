@@ -16,7 +16,7 @@ class TwitchUserViewSet(viewsets.ReadOnlyModelViewSet):
     authentication_classes = (SessionAuthentication, TokenAuthentication)
     permission_classes = (IsAuthenticated,)
     serializer_class = TwitchUserSerializer
-    queryset = TwitchUser.objects.all()[:4]
+    queryset = TwitchUser.objects.all()
 
 
 class BangSerializer(serializers.ModelSerializer):
