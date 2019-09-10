@@ -24,3 +24,7 @@ class Bang(models.Model):
 
     def __str__(self):
         return self.command
+
+    def clean(self):
+        if "!" in self.response[0]:
+            self.response = self.response[1:]
