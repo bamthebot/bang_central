@@ -26,5 +26,5 @@ class Bang(models.Model):
         return self.command
 
     def clean(self):
-        if "!" in self.response[0]:
+        if "!" in self.command[0]:
             self.response = self.response[1:]
