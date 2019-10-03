@@ -3,13 +3,21 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework import serializers
 
-from .models import TwitchUser, Bang
+from .models import TwitchUser, Bang, Blast
+
+
+class BlastSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blast
+        fields = ("name", "value")
 
 
 class TwitchUserSerializer(serializers.ModelSerializer):
+    blasts = BlastSerializer(many=True)
+
     class Meta:
         model = TwitchUser
-        fields = ('twitch_id', 'twitch_name', 'email', 'access_token', 'user')
+        fields = ('twitch_id', 'twitch_name', 'email', 'access_token', 'user', 'command_character', 'blasts')
 
 
 class TwitchUserViewSet(viewsets.ReadOnlyModelViewSet):

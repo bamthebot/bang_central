@@ -12,6 +12,7 @@ class TwitchUser(models.Model):
     expiration_date = models.DateField()
     scope = models.CharField(max_length=500)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    command_character = models.CharField(max_length=1, default="!")
 
     def __str__(self):
         return self.twitch_name
@@ -27,4 +28,16 @@ class Bang(models.Model):
 
     def clean(self):
         if "!" in self.command[0]:
-            self.response = self.response[1:]
+            self.command = self.command[1:]
+
+
+class Blast(models.Model):
+    name = models.CharField(max_length=500)
+    value = models.CharField(max_length=500)
+    twitch_user = models.ForeignKey(TwitchUser, related_name="blasts", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} -> {self.value}"
+
+    def __repr__(self):
+        return f"{self.name} -> {self.value}"
