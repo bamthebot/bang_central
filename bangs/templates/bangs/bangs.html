@@ -1,14 +1,28 @@
 {% extends 'bangs/base.html' %}
 
 {% block content %}
+<form action="{% url 'prefix' %}" method="post" class="form-inline">
+    <div class="row form-group graphics-container">
+        {% csrf_token %}
+        {% for field in prefix_form %}
+        <div class="col-auto">
+        <label for="{{ field.name }}">Command Prefix  </label>
+        </div>
+        <div class="col-auto">
+        {{ field }}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Submit" class="btn btn-info">
+    </div>
+</form>
 <form method="post" id="bang_formset" action="{% url 'bangs' %}">
     <div class="row">
-        <div id="existing-bangs" class="col-md-6 form-group-sm graphics-container">
+        <div id="existing-bangs" class="col-md-3 form-group-sm graphics-container">
             <h1 id="saved-bangs">Your Bangs</h1>
-            {% if bang_formset.forms %}
+            {% if formsets.bang_formset.forms %}
             {% csrf_token %}
-            {{ bang_formset.management_form }}
-            {% for form in bang_formset %}
+            {{ formsets.bang_formset.management_form }}
+            {% for form in formsets.bang_formset %}
             {% for hidden_field in form.hidden_fields %}
             {{ hidden_field }}
             {% endfor %}
@@ -34,7 +48,7 @@
             {% endif %}
             <input type="submit" value="Submit" class="btn btn-info"/>
         </div>
-        <div class="col-md-4 filled-container">
+        <div class="col-md-7 filled-container">
             <h3>What is a Bang?</h3> 
             <p>A bang is a command/response pair that can be either defined by the user, or be a special-bang.</p>
             <p>You can define, edit and delete your bangs here on the left. </p>
@@ -45,5 +59,55 @@
         </div>
     </div>
 </form>
+</div>
+<div class="row">
+    <div id="existing-blasts" class="col-md-3 form-group-sm graphics-container">
+        <form method="post" id="blast_formset" action="{% url 'blasts' %}">
+            <h1 id="saved-bangs">Your Blasts</h1>
+            {% if formsets.blast_formset.forms %}
+            {% csrf_token %}
+            {{ formsets.blast_formset.management_form }}
+            {% for form in formsets.blast_formset %}
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+                {% if field.name == 'DELETE' %}
+                <div class="form-check">
+                    {{ field }}
+                    <label class="form-check-label" for="{{ field.id_for_label}}">Delete</label>
+                </div>
+                {% else %}
+                {{ field }}
+                {% endif %}
+                {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% empty %}
+            <p class="no_bangs">There are no blasts saved... yet.</p>
+            {% endfor %}
+            {% endif %}
+            <input type="submit" value="Submit" class="btn btn-info"/>
+        </form>
+    </div>
+<div class="col-md-7 filled-container">
+            <h3>What is a Blast?</h3> 
+            <p>A blast is a variable name/value defined by the user.</p>
+            <p>You can define, edit and delete your blasts here on the left. </p>
+            <h3>Whats their purpose?</h3> 
+            <p>Blasts are here to make your bangs simpler. They let you define a variable you'll be able to use in other bangs AND blasts.</p>
+            <p>
+                Imagine I want to make my own "!worldrecord", "!leaderboard" and "!personalbest" chains for my main game/category: LEGO Harry Potter/Replay Story.
+                I'd have to write "lhp1-4/Replay Story" on my version of all those bangs! And if I change my main game I'd have to update them all, but with blasts
+                I just have to define my "maingamecategory" in one blast and then just use that blast in the other bangs. My bangs will end up looking like this:
+            </p>
+            <pre><kbd>"wr": "!worldrecord $(maingamecategory)"</kbd></pre>
+            <pre><kbd>"lb": "!leaderboard $(maingamecategory)"</kbd></pre>
+            <pre><kbd>"pb": "!personalbest $(myname)/$(maingamecategory)"</kbd></pre> (here "myname" is another blast I defined)
+        </div>
 </div>
 {% endblock %}

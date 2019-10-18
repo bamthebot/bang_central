@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.forms import inlineformset_factory
 from .models import TwitchUser, Bang
+from .forms import (
+    BangInlineFormset,
+    post_user_formsets,
+    get_user_formsets,
+    CommandPrefixForm,
+    set_form_styles,
+)
 from .utils import auth
 import datetime
 
@@ -94,26 +101,35 @@ def login_view(request):
 @login_required(login_url="/bot/login/")
 def bangs(request):
     user = request.user
-    BangInlineFormset = inlineformset_factory(
-        User, Bang, fields=("command", "response"), extra=1
-    )
+    twitch_user = TwitchUser.objects.get(user=user)
     if request.method == "POST":
-        bang_formset = BangInlineFormset(request.POST, request.FILES, instance=user)
-        if bang_formset.is_valid():
-            bang_formset.save()
-    bang_formset = BangInlineFormset(instance=user)
-    for form in bang_formset:
-        for field in form:
-            if field.name == "DELETE":
-                field.field.widget.attrs.update({'class': 'form-check-input'})
-                continue
-            field.field.widget.attrs.update({'class': 'form-control'})
-    return render(request, "bangs/bangs.html", {"bang_formset": bang_formset})
+        post_user_formsets(request, user, formset_type="bang")
+    prefix_form = CommandPrefixForm(instance=twitch_user)
+    set_form_styles(prefix_form)
+    formsets = get_user_formsets(request, user, twitch_user)
+    return render(
+        request, "bangs/bangs.html", {"prefix_form": prefix_form, "formsets": formsets}
+    )
+
+
+@login_required(login_url="/bot/login/")
+def blasts(request):
+    user = request.user
+    if request.method == "POST":
+        post_user_formsets(request, user, formset_type="blast")
+    return redirect("bangs")
+
+
+@login_required(login_url="/bot/login/")
+def prefix(request):
+    user = request.user
+    twitch_user = TwitchUser.objects.get(user=user)
+    if request.method == "POST":
+        CommandPrefixForm(request.POST, instance=twitch_user).save()
+    return redirect("bangs")
 
 
 def home(request):
-    get_request = auth.authorize_request(
-        "chat:read+chat:edit+openid+user:read:email"
-    )
+    get_request = auth.authorize_request("chat:read+chat:edit+openid+user:read:email")
     context = {"get_request": get_request}
     return render(request, "bangs/index.html", context)
